@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 11 05:11:49 2023
 
-@author: ays
-"""
 import numpy as np
 from fractions import Fraction as frac
 from numbers import Rational as Q
