@@ -1,2 +1,2 @@
 # projlinalg
-projective geometry and linear algebra library under development
+results from learning some geometry and linear algebra
