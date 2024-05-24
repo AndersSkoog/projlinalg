@@ -8,7 +8,7 @@ def all_distinct(coll):
   else:
     raise TypeError("call to function: distinct expected iterable, got:{t}".format(t=type(coll)))
 
-def all(coll, pred):
+def all_pass_pred(coll, pred):
   if is_iterable(coll):
     for el in coll:
       if pred(el) is False:
@@ -17,7 +17,7 @@ def all(coll, pred):
   else:
     raise TypeError("call to function: distinct expected iterable, got:{t}".format(t=type(coll)))
 
-def any(coll, pred):
+def any_pass_pred(coll, pred):
   if is_iterable(coll):
     for el in coll:
       if pred(el):
