@@ -174,14 +174,14 @@ def rhombic_dodecahedron_number(n):
     return 1 if n <= 1 else centered_cube_number(n) + (6 * m_gon_pyramid(4, n - 1))
 
 def centered_cube_number(n):
-    return 1 if n <= 1 else pow(n,3) + pow(n - 1,3)
+    return 1 if n <= 1 else pow(n, 3) + pow(n - 1, 3)
 
-def m_gon_pyramid(m,n):
+def m_gon_pyramid(m, n):
     nom = n * (n + 1) * ((m - 2) * n - m + 5 )
     dnom = 6
     return 1 if n <= 1 else int(nom / dnom)
 
-def centered_mgon_pyramid(m,n):
+def centered_mgon_pyramid(m, n):
     n2 = 2 * n - 1
     m_1 = m - 1
     nn = pow(n,2)

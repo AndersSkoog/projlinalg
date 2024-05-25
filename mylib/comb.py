@@ -1,6 +1,18 @@
-from itertools import permutations
-from typing import List, Any
+import itertools
 import numpy as np
+import math
+
+
+def det(m):
+  dim = len(m)
+  t1 = []
+  t2 = []
+  for it1 in range(dim):
+    t1.append(math.prod([m[j1][(it1 + j1) % dim] for j1 in range(dim)]))
+  for it2 in list(reversed(range(dim))):
+    t2.append(math.prod([m[j2][(it2 - j2) % dim] for j2 in range(dim)]))
+  return sum(t1) - sum(t2)
+
 
 def det_matrix(terms, d):
   if d > len(terms):
