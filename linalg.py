@@ -6,52 +6,24 @@ from fractions import Fraction as frac
 from numbers import Rational as Q
 import math
 
-
-class Mtx:
-    
- @staticmethod
- def getcol(i,mtx):
-   return [row[i] for row in mtx]  
-       
- @staticmethod
- def getid(n,m): 
-    ret = [[0] * m] * m
-    for i in range(m):
-      for j in range(n):
-        v = 1 if i == j else 0
-        ret[i][j] = v
-    return ret  
-       
-
-
-
-
-
-
-
-
-
-
- 
-
 class SqrMtx:
   @property
-  def I2():
+  def I2(self):
     return SqrMtx([[1,0],[1,0]])
   @property
-  def G2():
+  def G2(self):
     return SqrMtx([[1,0],[0,-1]])
   @property
-  def R2():
+  def R2(self):
     return SqrMtx([[0,1],[1,0]])
   @property
-  def B2():
+  def B2(self):
     return SqrMtx([[0,-1],[1,0]])    
   @property
-  def O2():
+  def O2(self):
     return SqrMtx([[0,0],[0,0]])
   @property
-  def Shear2():
+  def Shear2(self):
     return SqrMtx([[1,1],[0,1]])    
     
   @staticmethod
@@ -95,10 +67,8 @@ class SqrMtx:
       self.dim = np.shape(inp)[0]
       self.literal = inp
       self.cols = [SqrMtx.getcol(i, inp) for i in range(self.dim)]
-              
-      
-
-    else: raise('type error!')
+    else:
+      raise TypeError("type error")
     
   def det(self):
     return int(round(np.linalg.det(np.array(self.literal))))
@@ -139,7 +109,8 @@ class SqrMtx:
       for ri,row in enumerate(self.literal):
         lit[ri] = sum([tup[0] * tup[1] for tup in zip(row,val.arr)])
       return Vector(lit)
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
           
   def __add__(self,sqrmtx):
     if isinstance(sqrmtx,SqrMtx) and sqrmtx.dim == self.dim:
@@ -148,7 +119,8 @@ class SqrMtx:
         for ei,ent in enumerate(row):
           lit[ri][ei] = ent + sqrmtx[ri][ei]
       return SqrMtx(lit)
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
 
   def __sub__(self,sqrmtx):
     if isinstance(sqrmtx,SqrMtx) and sqrmtx.dim == self.dim:
@@ -157,7 +129,8 @@ class SqrMtx:
         for ei,ent in enumerate(row):
           lit[ri][ei] = ent - sqrmtx[ri][ei]
       return SqrMtx(lit)
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
     
     
     
@@ -235,13 +208,15 @@ class Vector:
   def y1y2(m,x1x2):
     if isinstance(m,SqrMtx) and m.dim == 2 and isinstance(x1x2,Vector) and x1x2.dim == 2:
       return m * x1x2     
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
     
   def z1z2(m1,m2,x1x2):
     if all([isinstance(v,SqrMtx) and v.dim == 2 for v in [m1,m2]]) and isinstance(x1x2,Vector) and x1x2.dim == 2:    
     #if isinstance(m1,SqrMtx) and m1.dim == 2 and and isinstance(x1x2,Vector) and x1x2.dim == 2:
       return (m1 * m2) * x1x2      
-    else: raise('type error!')  
+    else:
+      raise TypeError("type error!")
   
   def __init__(self,arr):
     if type(arr) is list and len(np.shape(arr)) == 1 and all([isinstance(v,Q) for v in arr]):
@@ -256,7 +231,8 @@ class Vector:
   def dot(self,vect):
     if isinstance(vect,Vector) and vect.dim == self.dim:
       return sum([tup[0] * tup[1] for tup in zip(self.arr,vect.arr)])
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
   
   def norm(self):
     return math.sqrt(sum([pow(v,2) for v in self.arr]))
@@ -267,13 +243,16 @@ class Vector:
       if self.isNonZero() and vect.isNonZero(): 
         return self.dot(vect) == 0;
       else: return False;
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
   
   def isColinear(self,vect):
     if isinstance(vect,Vector) and vect.dim == self.dim:
       if self.isNonZero() == False or vect.isNonZero() == False: return False  
-      else: return abs(self.dot(vect)) == self.norm * vect.norm
-    else: raise('type error!')
+      else:
+        return abs(self.dot(vect)) == self.norm * vect.norm
+    else:
+      raise TypeError("type error!")
      
     
   def __mul__(self,inp):
@@ -285,7 +264,8 @@ class Vector:
     elif isinstance(inp,Q):
      return Vector(list([inp * v for v in self.arr]))    
     
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
     
   def __neg__(self):
     arr = list([-v for v in self.arr])
@@ -295,13 +275,15 @@ class Vector:
     if isinstance(vect,Vector) and self.dim == vect.dim:
       arr = list([tup[0] + tup[1] for tup in zip(self.arr,vect.arr)])
       return Vector(arr)
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
     
   def __sub__(self,vect):  
     if isinstance(vect,Vector) and self.dim == vect.dim:
       arr = list([tup[0] - tup[1] for tup in zip(self.arr,vect.arr)])
       return Vector(arr)
-    else: raise('type error!')      
+    else:
+      raise TypeError("type error!")
     
 class VectorSpace:
   #check if input is a one dimenional list where all elements are rationals.   
@@ -309,7 +291,8 @@ class VectorSpace:
   def validLiteral(arr):
     if type(arr) is list and len(np.shape(arr)) == 1 and all([isinstance(v,Q) for v in arr]): 
         return True
-    else: return False
+    else:
+      return False
     
   def __init__(self,arr):
     if VectorSpace.validLiteral(arr):   
@@ -373,22 +356,16 @@ class Lin:
       self.p1 = p1 if isinstance(p1,Point) else Point(p1)
       self.p2 = p2 if isinstance(p2,Point) else Point(p2)
       self.dim = p1.dim
-    else: raise('type error!')
+    else:
+      raise TypeError("type error!")
   
   def is_distinct(self,line):
     if isinstance(line,Lin):
       return len(set(all([v._arr for v in [self.p1,self.p2,line.p1,line.p2]]))) > 2   
-    else: raise('error')  
-  def intersects(self,line):
-    return True
-             
-  def is_scew(self,line):
-    return True
-    
-  def is_paralell(self,line):
-    return True      
+    else:
+      raise TypeError("type error!")
 
-
+"""
 class Line2d:
   @staticmethod
   def solve_line_eq_general(a,b,c):
@@ -429,7 +406,7 @@ class Line2d:
     return res
     #xy = (1/d * minors) * Vector([l1[2],l2[2]])
     #print(xy)
-
+"""
 
 
 
