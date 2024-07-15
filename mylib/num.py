@@ -11,7 +11,7 @@ def trinomial(m, k, l):
   dnom = math.factorial(m) * math.factorial(k) * math.factorial(l)
   return nom / dnom
 
-def pyth_tripple(m,n):
+def pyth_tripple(m, n):
   m2, n2 = m**2, n**2
   a = (m2 - n2) ** 2
   b = (2*m*n) ** 2
@@ -52,6 +52,14 @@ def incMixed(tup, bases):
     else:
       result[k] = 0
   return result
+
+def factors(num):
+    ret = []
+    for n in range(1, num):
+      if num % n == 0:
+        ret.append(n)
+    return ret
+
 
 def factor(n):
   primes = first_primes if first_primes[-1] < n else sieve(n)
@@ -115,9 +123,11 @@ def gcd(a, b):
   _a = a if a > 0 else -a
   _b = b if b > 0 else -b
   while True:
-    if _b == 0: return _a
+    if _b == 0:
+        return _a
     _a %= _b
-    if a == 0: return _b
+    if a == 0:
+        return _b
     _b %= _a
 
 def lcm(a, b):
@@ -139,7 +149,7 @@ def gnomonic_number(n):
     return 1 if n == 1 else pow(n, 2) - pow(n - 1, 2)
 
 
-def polygon_num(s,n):
+def polygon_num(s, n):
     t1 = (n * (n - 1)) / 2
     t2 = s - 2
     res = t2 * t1 + n
@@ -153,13 +163,13 @@ def tetrahedral_numbers(n):
     return 1 if n <= 1 else int((n * ((n + 1) * (n + 2))) / 6)
 
 def cubic_number(n):
-    return 1 if n <= 1 else pow(n,3)
+    return 1 if n <= 1 else pow(n, 3)
 
 def octahedral_number(n):
-    return 1 if n <= 1 else int((n * (pow(2 * n,2) + 1)) / 3)
+    return 1 if n <= 1 else int((n * (pow(2 * n, 2) + 1)) / 3)
 
 def icosahedral_number(n):
-     n2 = pow(n,2)
+     n2 = pow(n, 2)
      n5 = 5 * n
      return 1 if n <= 1 else int((n * (5*n2 - n5 + 2)) / 2)
 
@@ -177,7 +187,7 @@ def centered_cube_number(n):
     return 1 if n <= 1 else pow(n, 3) + pow(n - 1, 3)
 
 def m_gon_pyramid(m, n):
-    nom = n * (n + 1) * ((m - 2) * n - m + 5 )
+    nom = n * (n + 1) * ((m - 2) * n - m + 5)
     dnom = 6
     return 1 if n <= 1 else int(nom / dnom)
 
@@ -196,9 +206,9 @@ def seq(s_start,s_stop,init,fn):
         ret.append(nv)
     return ret
 
-def get_perfect(doubles):
-    s = sum(doubles)
-    last = doubles[len(doubles) - 1]
+def get_perfect(doubles_seq):
+    s = sum(doubles_seq)
+    last = doubles_seq[len(doubles_seq) - 1]
     return s * last
 
 

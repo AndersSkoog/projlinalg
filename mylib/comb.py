@@ -41,6 +41,6 @@ def det_matrix(terms, d):
 
 
 def det_from_terms(terms, d=3):
-  return int(round(np.linalg.det(det_matrix(terms))))
+  return int(round(np.linalg.det(det_matrix(terms, d))))
 
 
