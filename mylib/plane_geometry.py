@@ -277,6 +277,7 @@ def cross_ratio(p1, p2, p3):
   else:
     return None
 
+"""
 def twist_ratio(p1, p2, p3):
   if forms_right_triangle(p1, p2, p3):
     q1 = quadrance_of_distance(p2, p3)
@@ -284,7 +285,7 @@ def twist_ratio(p1, p2, p3):
     l1 = line_through_points(p1, p2)
     l2 = line_through_points(p1, p3)
     t = twist(l1, l2)
-
+"""
 
 def lines_are_perp(l1, l2):
   a1, b1, a2, b2 = l1[0], l1[1], l2[0], l2[1]
@@ -407,99 +408,6 @@ def quadrea(p1, p2, p3):
   t2 = 2 * sum([pow(q1, 2), pow(q2, 2), pow(q3, 2)])
   return t1 - t2
 
-
-
-
-
-"""
-exercises
-"""
-sa = signed_area_triangle([0, 0],[2, 7],[3, 0])
-print(sa)
-def signed_execise(v1, v2):
-  order_1 = cross_product(v1, v2)
-  order_2 = cross_product(v2, v1)
-  print(order_1, order_2)
-  print(order_2 == -order_1)
-  print(order_1 == -order_2)
-
-def distributive_exercise(v1, v2, v3):
- xp1 = cross_product(vector_add(v1, v2), v3)
- xp2 = cross_product(v1, v3) + cross_product(v2, v3)
- print(xp1, xp2, xp1 == xp2)
-
-def scalar_exercise(v1, v2, s):
-  eq1 = cross_product(vector_scale(s, v1), v2)
-  eq2 = s * cross_product(v1, v2)
-  eq3 = cross_product(v1, vector_scale(s, v2))
-  print(eq1, eq2, eq3)
-
-
-def cross_law_exercise(A, B):
- q1 = vector_quadrance(A)
- q2 = vector_quadrance(B)
- op_q = vector_quadrance([B[0] - A[0], B[1] - A[1]])
- return ((q1 + q2 - op_q) ** 2) == (4 * q1 * q2) * (1 - vector_spread(A, B))
-
-def triangle_exercise(A, B):
-  OA = A
-  OB = B
-  AB = [B[0] - A[0], B[1] - A[1]]
-  s = vector_spread(OA, OB)
-  t = vector_spread(OB, AB)
-  r = vector_spread(OA, AB)
-  q1 = vector_quadrance(OB)
-  q2 = vector_quadrance(OA)
-  q3 = vector_quadrance(AB)
-  s_op = q3
-  t_op = q2
-  r_op = q1
-  spread_law = all([s / q3, t / q2, r / q1])
-  cl1 = cross_law_exercise(OB, OA)
-  cl2 = cross_law_exercise(OA, AB)
-  cl3 = cross_law_exercise(AB, OA)
-  spread_rel = (sum([s, t, r]) ** 2) == 2 * sum([pow(s,2),pow(t,2),pow(r,2)]) + (4 * s * t * r)
-  print(s, t, r, q1, q2, q3, spread_law,cl1,cl2,cl3, spread_rel)
-
-def spread_law_exercise(p1, p2, p3):
-  q1 = quadrance_of_distance(p2, p3)
-  q2 = quadrance_of_distance(p1, p3)
-  q3 = quadrance_of_distance(p1, p2)
-  sp1 = spread_of_lines(line_through_points(p1, p2), line_through_points(p1, p3))
-  sp2 = spread_of_lines(line_through_points(p2, p1), line_through_points(p2, p3))
-  sp3 = spread_of_lines(line_through_points(p3, p1), line_through_points(p3, p2))
-  print(sp1, q1)
-  res = [sp1 / q1, sp2 / q2, sp3 / q3]
-  print(res, all(res))
-
-
-spread_law_exercise([5, 7], [12, 6], [29, 5])
-#def chromo_spreads(v1, v2):
-  #a, b, c, d = v1[0], v1[1], v2[0], v2[1]
-
-
-
-
-
-
-
-
-#V, W, K, SC = [5, 3], [9, 14], [12, 4], 5
-#signed_execise(V, W)
-#distributive_exercise(V, W, K)
-#scalar_exercise(V, W, SC)
-#triangle_exercise([16, 4], [-6, 9])
-
-
-#print(scale(5, [1, 6]))
-#scalar_check_euality_exercise(V, W, SC)
-
-
-#signed_order_execise([5, 3],[7, 5])
-#comute_exercise([5, 3], [7, 5], [9, 42])
-#scalar_check_euality_exercise([5, 7], [19, 2], 5)
-#print(scale(4, [4, 6]))
-#print(cross_product([4, 6], scale(5, [2, 7])))
 
 
 
