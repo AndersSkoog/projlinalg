@@ -165,7 +165,7 @@ def dot_product(v1, v2, c="blue"):
     return (a * c) - (b * d)
   elif c == "green":
     return (a * d) + (b * c)
-  else:.
+  else:
     raise ArithmeticError("argument of c must be ")
 
 def quadrance_of_distance(p1, p2):
